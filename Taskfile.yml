@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: deploy
+  build:
+    cmds:
+      - go build -o bin/task
+  deploy:
+    deps: [build]
+    cmds:
+      - scp bin/task student@profy12-server.eddi.cloud:/home/student/
+      - ssh student@profy12-server.eddi.cloud "chmod u+x task"
